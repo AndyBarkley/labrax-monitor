@@ -1,18 +1,39 @@
+// src/main.cpp
 #include <Arduino.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
 
-// put function declarations here:
-int myFunction(int, int);
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
 
-void setup() {
-  // put your setup code here, to run once:
-  int result = myFunction(2, 3);
+Adafruit_SSD1306 display(
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT,
+    &Wire,
+    -1
+);
+
+void setup()
+{
+    Wire.begin();
+
+    display.begin(
+        SSD1306_SWITCHCAPVCC,
+        0x3C
+    );
+
+    display.clearDisplay();
+
+    display.setTextSize(1);
+    display.setTextColor(SSD1306_WHITE);
+
+    display.setCursor(0, 0);
+    display.println("Lab Rax Monitor");
+
+    display.display();
 }
 
-void loop() {
-  // put your main code here, to run repeatedly:
-}
-
-// put function definitions here:
-int myFunction(int x, int y) {
-  return x + y;
+void loop()
+{
 }
